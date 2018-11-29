@@ -7,7 +7,7 @@
 #include <SPI.h>
 #include <Ethernet.h>
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; //MAC地址
-IPAddress server(123,206,77,225);  //服务器ip
+IPAddress server(123,111,111,111);  //服务器ip
 EthernetClient client; //网络客户端
 void setup() {
   Serial.begin(9600);
@@ -35,7 +35,7 @@ void setup() {
   if (client.connect(server, 5055)) {
     Serial.println("connected");
     client.println("GET /?id=1&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
-    client.println("Host:123.206.77.225");
+    client.println("Host:123.111.111.111");
     client.println("Connection: close");
     client.println(); 
   } 
@@ -52,7 +52,7 @@ void loop()
   if (client.connect(server, 5055)) {
     Serial.println("connected");
     client.println("GET /?id=1&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
-   // client.println("Host:123.206.77.225");
+
    //client.println("Connection: close");
     client.println();     //这个回车 必须有！
   } 
@@ -85,7 +85,7 @@ void loop()
   if (client.connect(server, 5055)) {
     Serial.println("connected");
     client.println("GET /?id=2&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
-   // client.println("Host:123.206.77.225");
+
    //client.println("Connection: close");
     client.println();     //这个回车 必须有！
   } 
@@ -117,7 +117,7 @@ void loop()
   if (client.connect(server, 5055)) {
     Serial.println("connected");
     client.println("GET /?id=3&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
-   // client.println("Host:123.206.77.225");
+
    //client.println("Connection: close");
     client.println();     //这个回车 必须有！
   } 
@@ -149,7 +149,7 @@ void loop()
   if (client.connect(server, 5055)) {
     Serial.println("connected");
     client.println("GET /?id=4&lat=36.691887&lon=117.119518 HTTP/1.1");
-   // client.println("Host:123.206.77.225");
+ 
    //client.println("Connection: close");
     client.println();     //这个回车 必须有！
   } 
