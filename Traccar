@@ -1,0 +1,179 @@
+拼接字符串：Traccar =  "GET /?id=4&lat="+JingDu+"&lon="+WeiDu+"&DianYa=90 HTTP/1.1\r\n\r\n";
+
+浏览器访问： http://www.***.com:5055/?id=1&lat=36.695652&lon=117.075020
+
+// traccar 协议试验， 获取到ip地址，先连接，然后发送数据，必须加回车，服务器才认为结束，循环接收服务器返回来的数据，然后断开连接，否则，再次发送不成功！
+
+#include <SPI.h>
+#include <Ethernet.h>
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; //MAC地址
+IPAddress server(123,206,77,225);  //服务器ip
+EthernetClient client; //网络客户端
+void setup() {
+  Serial.begin(9600);
+   while (!Serial) {
+    ; 
+  } 
+#if defined(WIZ550io_WITH_MACADDRESS)    //DHCP 获取ip
+  if (Ethernet.begin() == 0) {
+#else
+  if (Ethernet.begin(mac) == 0) {
+#endif  
+    Serial.println("Failed to configure Ethernet using DHCP");  //获取地址失败
+    for(;;)
+      ;
+  }
+  Serial.print("My IP address: ");   //输出ip地址
+  for (byte thisByte = 0; thisByte < 4; thisByte++) {
+    Serial.print(Ethernet.localIP()[thisByte], DEC);
+    Serial.print("."); 
+  }
+  Serial.println();
+/*
+  delay(1000);
+  Serial.println("connecting...");  // 正在连接
+  if (client.connect(server, 5055)) {
+    Serial.println("connected");
+    client.println("GET /?id=1&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
+    client.println("Host:123.206.77.225");
+    client.println("Connection: close");
+    client.println(); 
+  } 
+  else {
+    Serial.println("connection failed");
+  }
+*/
+}
+ 
+void loop()
+{
+  
+  Serial.println("connecting...1");  // 正在连接 序号1
+  if (client.connect(server, 5055)) {
+    Serial.println("connected");
+    client.println("GET /?id=1&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
+   // client.println("Host:123.206.77.225");
+   //client.println("Connection: close");
+    client.println();     //这个回车 必须有！
+  } 
+  else {
+    Serial.println("connection failed");
+  }
+  delay(1000);
+  
+ //以下是接收 HTTP 传过来的数据
+  for(int i=1; i<=50; i++)  
+  {
+  if (client.available()) {
+    char c = client.read(); //读客户端数据
+    Serial.print(c);
+    }
+  }
+  Serial.println( );
+   if (!client.connected()) {
+    Serial.println();
+    Serial.println("disconnecting.");
+    client.stop();
+    while(true);
+  }
+  client.stop();
+  Serial.println("client stoping");
+  delay(1000);
+  
+  
+  Serial.println("connecting...2");  // 正在连接序号2
+  if (client.connect(server, 5055)) {
+    Serial.println("connected");
+    client.println("GET /?id=2&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
+   // client.println("Host:123.206.77.225");
+   //client.println("Connection: close");
+    client.println();     //这个回车 必须有！
+  } 
+  else {
+    Serial.println("connection failed");
+  }
+  delay(1000);
+  
+ //以下是接收 HTTP 传过来的数据
+  for(int i=1; i<=50; i++)  
+  {
+  if (client.available()) {
+    char c = client.read(); //读客户端数据
+    Serial.print(c);
+    }
+  }
+  Serial.println( );
+   if (!client.connected()) {
+    Serial.println();
+    Serial.println("disconnecting.");
+    client.stop();
+    while(true);
+  }
+  client.stop();
+  Serial.println("client stoping");
+  delay(1000);
+  
+    Serial.println("connecting...3");  // 正在连接序号3
+  if (client.connect(server, 5055)) {
+    Serial.println("connected");
+    client.println("GET /?id=3&timestamp=1495209600&lat=36.691887&lon=117.119518&speed=0&bearing=0&altitude=73.629&batt=44 HTTP/1.1");
+   // client.println("Host:123.206.77.225");
+   //client.println("Connection: close");
+    client.println();     //这个回车 必须有！
+  } 
+  else {
+    Serial.println("connection failed");
+  }
+  delay(1000);
+  
+ //以下是接收 HTTP 传过来的数据
+  for(int i=1; i<=50; i++)  
+  {
+  if (client.available()) {
+    char c = client.read(); //读客户端数据
+    Serial.print(c);
+    }
+  }
+  Serial.println( );
+   if (!client.connected()) {
+    Serial.println();
+    Serial.println("disconnecting.");
+    client.stop();
+    while(true);
+  }
+  client.stop();
+  Serial.println("client stoping");
+  delay(1000);
+  
+    Serial.println("connecting...4");  // 正在连接序号4
+  if (client.connect(server, 5055)) {
+    Serial.println("connected");
+    client.println("GET /?id=4&lat=36.691887&lon=117.119518 HTTP/1.1");
+   // client.println("Host:123.206.77.225");
+   //client.println("Connection: close");
+    client.println();     //这个回车 必须有！
+  } 
+  else {
+    Serial.println("connection failed");
+  }
+  delay(1000);
+  
+ //以下是接收 HTTP 传过来的数据 序号1
+  for(int i=1; i<=50; i++)  
+  {
+  if (client.available()) {
+    char c = client.read(); //读客户端数据
+    Serial.print(c);
+    }
+  }
+  Serial.println( );
+   if (!client.connected()) {
+    Serial.println();
+    Serial.println("disconnecting.");
+    client.stop();
+    while(true);
+  }
+  client.stop();
+  Serial.println("client stoping");
+  delay(1000);
+}
