@@ -1,4 +1,4 @@
-拼接字符串：Traccar =  "GET /?id=4&lat=lat=36.695652&lon=117.075020&DianYa=90 HTTP/1.1\r\n\r\n";
+拼接字符串：Traccar =  "GET /?id=4&lat=36.695652&lon=117.075020&DianYa=90 HTTP/1.1\r\n\r\n";
 
 浏览器访问： http://www.***.com:5055/?id=1&lat=36.695652&lon=117.075020
 
